@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, StyleSheet, ImageBackground, TouchableOpacity, Platform, KeyboardAvoidingView } from 'react-native';
 
 export default class Start extends React.Component {
   constructor(props) {
@@ -14,55 +14,64 @@ export default class Start extends React.Component {
     let { backgroundColor } = this.state
 
     return (
-      <View style={styles.container}>
-        <ImageBackground
-          style={styles.imgBackground}
-          source={require('../assets/Background-Image.png')}
-        >
-          <View style={styles.main}>
-            <Text style={styles.title}>Go Chat!</Text>
-          </View>
-
-          <View style={styles.chatOptions}>
-            <TextInput
-              style={styles.nameInput}
-              onChangeText={(name) => this.setState({ name })}
-              value={this.state.name}
-              placeholder='Enter Your Username'
-            />
-            <View style={styles.box}>
-              <Text
-                style={styles.backgroundColorText}>
-                Choose a Background Color
-              </Text>
-              <View style={styles.backgroundColor}>
-                <TouchableOpacity
-                  style={styles.backgroundColor1}
-                  onPress={() => this.setState({ backgroundColor: '#090C08' })}
-                />
-                <TouchableOpacity
-                  style={styles.backgroundColor2}
-                  onPress={() => this.setState({ backgroundColor: '#474056' })}
-                />
-                <TouchableOpacity
-                  style={styles.backgroundColor3}
-                  onPress={() => this.setState({ backgroundColor: '#8A95A5' })}
-                />
-                <TouchableOpacity
-                  style={styles.backgroundColor4}
-                  onPress={() => this.setState({ backgroundColor: '#B9C6AE' })}
-                />
-              </View>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ flex: 1 }}
+      >
+        <View style={styles.container}>
+          <ImageBackground
+            style={styles.imgBackground}
+            source={require('../assets/Background-Image.png')}
+          >
+            <View style={styles.main}>
+              <Text style={styles.title}>Go Chat!</Text>
             </View>
-            <TouchableOpacity
-              style={{ backgroundColor: backgroundColor, height: 60, }}
-              onPress={() => this.props.navigation.navigate('Chat', { name: this.state.name, backgroundColor: this.state.backgroundColor })}
-            >
-              <Text style={styles.startText}>Start Chatting!</Text>
-            </TouchableOpacity>
-          </View>
-        </ImageBackground>
-      </View>
+
+            <View style={styles.chatOptions}>
+              <TextInput
+                style={styles.nameInput}
+                onChangeText={(name) => this.setState({ name })}
+                value={this.state.name}
+                placeholder='Enter Your Username'
+              />
+              <View style={styles.box}>
+                <Text
+                  style={styles.backgroundColorText}>
+                  Choose a Background Color
+                </Text>
+                <View style={styles.backgroundColor}>
+                  <TouchableOpacity
+                    style={styles.backgroundColor1}
+                    onPress={() => this.setState({ backgroundColor: '#090C08' })}
+                  />
+                  <TouchableOpacity
+                    style={styles.backgroundColor2}
+                    onPress={() => this.setState({ backgroundColor: '#474056' })}
+                  />
+                  <TouchableOpacity
+                    style={styles.backgroundColor3}
+                    onPress={() => this.setState({ backgroundColor: '#8A95A5' })}
+                  />
+                  <TouchableOpacity
+                    style={styles.backgroundColor4}
+                    onPress={() => this.setState({ backgroundColor: '#B9C6AE' })}
+                  />
+                </View>
+              </View>
+              <TouchableOpacity
+                accessible={true}
+                accessibilityLabel="Enter to chat"
+                accessibilityHint="Username and profile picture will be displayed"
+                accessibilityRole="button"
+                style={{ backgroundColor: backgroundColor, height: 60, }}
+                onPress={() => this.props.navigation.navigate('Chat', { name: this.state.name, backgroundColor: this.state.backgroundColor })}
+              >
+                <Text style={styles.startText}>Start Chatting!</Text>
+              </TouchableOpacity>
+            </View>
+          </ImageBackground>
+        </View>
+      </KeyboardAvoidingView>
     )
   }
 }
