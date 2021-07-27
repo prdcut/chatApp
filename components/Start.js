@@ -24,7 +24,7 @@ export default class Start extends React.Component {
             source={require('../assets/Background-Image.png')}
           >
             <View style={styles.main}>
-              <Text style={styles.title}>Go Chat!</Text>
+              <Text style={styles.title}>Chat!</Text>
             </View>
 
             <View style={styles.chatOptions}>
