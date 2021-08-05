@@ -67,7 +67,7 @@ export default class Chat extends React.Component {
   //adds messages to cloud storage database
   addMessage() {
     const message = this.state.messages[0];
-    this.referenceChatMessages.add({
+    this.referenceMessages.add({
       _id: message._id,
       text: message.text || null,
       createdAt: message.createdAt,
